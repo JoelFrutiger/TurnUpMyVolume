@@ -21,7 +21,7 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name=".Start"
+            android:name=".StartActivity"
             android:label="@string/title_activity_start" >
         </activity>
     </application>
