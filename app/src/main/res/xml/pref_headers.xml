@@ -5,12 +5,5 @@
     <header android:fragment="joel.frutiger.turnupvolume.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
-    <header
-        android:fragment="joel.frutiger.turnupvolume.SettingsActivity$NotificationPreferenceFragment"
-        android:title="@string/pref_header_notifications" />
-
-    <header
-        android:fragment="joel.frutiger.turnupvolume.SettingsActivity$DataSyncPreferenceFragment"
-        android:title="@string/pref_header_data_sync" />
 
 </preference-headers>

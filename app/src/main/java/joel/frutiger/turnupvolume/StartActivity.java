@@ -1,7 +1,11 @@
 package joel.frutiger.turnupvolume;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,10 +39,18 @@ public class StartActivity extends Activity {
     public void onClickStartService(View view){
 
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        //temp
+
+        editor.putString("address", "1EzwoHtiXB4iFwedPr49iywjZn2nnekhoj");
+        editor.commit();
 
         //Starts MainActivity
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        Intent returnIntent = new Intent();
+        setResult(RESULT_OK,returnIntent);
+        finish();
     }
 
 }

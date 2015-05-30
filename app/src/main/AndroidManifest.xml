@@ -24,6 +24,13 @@
             android:name=".StartActivity"
             android:label="@string/title_activity_start" >
         </activity>
-    </application>
 
+        <service
+            android:name=".CheckBalanceIntentService"
+            android:exported="false" >
+        </service>
+
+
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
