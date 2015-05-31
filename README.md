@@ -10,4 +10,4 @@ Also if you can't find your phone you can send yourself some bitcoin, turn up th
 Address with 20000 Bits:
 1EzwoHtiXB4iFwedPr49iywjZn2nnekhoj
 
-To Test the Volume increase set the Trigger to 0
+To test the volume increase go to Settings and set the trigger to 0.
