@@ -19,23 +19,24 @@ import java.net.URL;
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
  * <p/>
- * TODO: Customize class - update intent actions, extra parameters and static
+ *
  * helper methods.
  */
 public class CheckBalanceIntentService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
+
+    //Action
     private static final String ACTION_CHECK = "joel.frutiger.turnupvolume.action.CHECK";
+
     private static final String LOG_TAG = "CheckBalanceIntent";
 
 
     /**
-     * Starts this service to perform action Foo with the given parameters. If
+     * Starts this service to perform action Check with the given parameters. If
      * the service is already performing a task this action will be queued.
      *
      * @see IntentService
      */
-    // TODO: Customize helper method
+
     public static void startActionCheck(Context context, String param1) {
         Intent intent = new Intent(context, CheckBalanceIntentService.class);
         intent.setAction(ACTION_CHECK);
@@ -58,8 +59,11 @@ public class CheckBalanceIntentService extends IntentService {
     }
 
     /**
-     * Handle action Foo in the provided background thread with the provided
+     * Handle action Check in the provided background thread with the provided
      * parameters.
+     * This method fetches the Bitcoin Address from the Preferences and queries blockchain.info for the Balance of the Address
+     * Then it checks if enough satoshis have been added by comparing with the old Balance fetched also from the shared Preferences.
+     * If all conditions are met, the Service sets the Ringtone Volume to maximum.
      */
     private void handleActionCheck() {
 
