@@ -50,7 +50,7 @@ public class StartActivity extends Activity {
 
         //Checks the Validity of the Address
         // A Bitcoin address, or simply address, is an identifier of 26-35 alphanumeric characters, beginning with the number 1 or 3, that represents a possible destination for a Bitcoin payment.
-        if (address.equals("empty") || address.length() < 26 || address.length() > 35){
+        /*if (address.equals("empty") || address.length() < 26 || address.length() > 35){
             CharSequence text = "Address Empty or Incorrect Length";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this, text, duration);
@@ -65,7 +65,7 @@ public class StartActivity extends Activity {
             toast.show();
             Log.d(LOG_TAG, "Address must start with a 3 or 1");
             return;
-        }
+        }*/
 
         //Saving the Address in the shared prefferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
