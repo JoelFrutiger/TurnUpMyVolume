@@ -24,11 +24,8 @@ import java.net.URL;
  */
 public class CheckBalanceIntentService extends IntentService {
 
-    //Action
     private static final String ACTION_CHECK = "joel.frutiger.turnupvolume.action.CHECK";
-
     private static final String LOG_TAG = "CheckBalanceIntent";
-
 
     /**
      * Starts this service to perform action Check with the given parameters. If
@@ -36,7 +33,6 @@ public class CheckBalanceIntentService extends IntentService {
      *
      * @see IntentService
      */
-
     public static void startActionCheck(Context context, String param1) {
         Intent intent = new Intent(context, CheckBalanceIntentService.class);
         intent.setAction(ACTION_CHECK);
@@ -82,14 +78,13 @@ public class CheckBalanceIntentService extends IntentService {
                 Log.d(LOG_TAG, "Address must start with a 3 or 1");
                 return;
             }
-
-            //url = new URL("https://blockchain.info/q/addressbalance/1EzwoHtiXB4iFwedPr49iywjZn2nnekhoj");
+            //Set URL
             url = new URL("https://blockchain.info/q/addressbalance/" + address);
+
+            //Send HTTP Get request and get the result
             HttpURLConnection urlConnection = (HttpURLConnection) url
                     .openConnection();
-
             InputStream in = urlConnection.getInputStream();
-
             BufferedReader r = new BufferedReader(new InputStreamReader(in));
             StringBuilder total = new StringBuilder();
             String line;
@@ -100,44 +95,35 @@ public class CheckBalanceIntentService extends IntentService {
             //This is the Current Balance denominated in Satoshis
             int currentBalance = Integer.parseInt(total.toString());
 
-
             if (currentBalance != 0){
-
-
+                //Get Balance form shared preferences
                 int oldBalance = preferences.getInt("oldBalance", 0);
 
-                if (oldBalance == 0){
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("oldBalance", currentBalance);
-                    editor.commit();
-                }
-                else{
-                    int increment = preferences.getInt("increment", 10000);
-                    //Check if sufficient Satoshis have been added
-                    if ((currentBalance - oldBalance) >= increment){
-                        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-                        int maxvalue = audioManager.getStreamMaxVolume(audioManager.STREAM_RING);
-                        //Check if Volume is already at Max
-                        if (maxvalue != audioManager.getStreamVolume(AudioManager.STREAM_RING)){
-                            audioManager.setStreamVolume(audioManager.STREAM_RING, maxvalue, 0);
-                            Log.d(LOG_TAG, "Volume turned on");
-                        }
+                //Get Increment to trigger the Volume increase
+                int incrementBit = preferences.getInt("increment", 100);
+                int incrementSatoshi = incrementBit * 100;
 
+                //Check if sufficient Satoshis have been added
+                if ((currentBalance - oldBalance) >= incrementSatoshi){
+                    AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+                    int maxvalue = audioManager.getStreamMaxVolume(audioManager.STREAM_RING);
+
+                    //Check if Volume is already at Max
+                    if (maxvalue != audioManager.getStreamVolume(AudioManager.STREAM_RING)){
+                        //Set Volume to Max
+                        audioManager.setStreamVolume(audioManager.STREAM_RING, maxvalue, 0);
+                        Log.d(LOG_TAG, "Volume turned on");
                     }
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("oldBalance", currentBalance);
-                    editor.commit();
-
                 }
+                //Set new Balance
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt("oldBalance", currentBalance);
+                editor.commit();
             }
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         Log.d(LOG_TAG, "ActionCalled");
-
     }
-
 }

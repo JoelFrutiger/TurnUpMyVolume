@@ -21,7 +21,6 @@ public class MainActivity extends ActionBarActivity {
     private static final int STARTACTIVITY_REQUEST = 0;
     private static final String LOG_TAG = "MainActivity";
     private static final String ACTION_CHECK = "joel.frutiger.turnupvolume.action.CHECK";
-    private static final String EXTRA_ADDRESS = "joel.frutiger.turnupvolume.extra.Address";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

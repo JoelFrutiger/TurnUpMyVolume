@@ -30,6 +30,7 @@ public class StartActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_start, menu);
+
         return true;
     }
 
@@ -65,6 +66,7 @@ public class StartActivity extends Activity {
             Log.d(LOG_TAG, "Address must start with a 3 or 1");
             return;
         }
+
         //Saving the Address in the shared prefferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
@@ -76,5 +78,4 @@ public class StartActivity extends Activity {
         setResult(RESULT_OK,returnIntent);
         finish();
     }
-
 }
