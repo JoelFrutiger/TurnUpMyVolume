@@ -146,6 +146,7 @@ public class MainActivity extends ActionBarActivity {
                 //Set the textView
                 TextView currentBalanceTextView = (TextView) findViewById(R.id.currentBalance);
                 currentBalanceTextView.setText(Integer.toString(balanceInBits) + " Bits");
+                changeUIRunning();
                 Log.d(LOG_TAG, "Result from StartActivity OK");
             }
         }
@@ -290,6 +291,7 @@ public class MainActivity extends ActionBarActivity {
                 editor.putInt("oldBalance", currentBalance);
                 editor.commit();
             }
+
 
         } catch (Exception e) {
             CharSequence text = "Failed to Connect";

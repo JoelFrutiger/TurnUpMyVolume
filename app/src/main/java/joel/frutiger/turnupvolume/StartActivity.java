@@ -26,6 +26,11 @@ public class StartActivity extends Activity {
         setContentView(R.layout.activity_start);
 
         //TODO: Add QR-Code Scanner
+
+        //TODO: Remove this Part, This part is used for testing purposes
+        EditText editTextAddress = (EditText)findViewById(R.id.editText);
+        editTextAddress.setText("1NfV4TwCu6Sar4GDqaurympk7Buo8dEbC3");
+
     }
 
     @Override
@@ -52,7 +57,7 @@ public class StartActivity extends Activity {
 
         //Checks the Validity of the Address
         // A Bitcoin address, or simply address, is an identifier of 26-35 alphanumeric characters, beginning with the number 1 or 3, that represents a possible destination for a Bitcoin payment.
-        /*if (address.equals("empty") || address.length() < 26 || address.length() > 35){
+        if (address.equals("empty") || address.length() < 26 || address.length() > 35){
             CharSequence text = "Address Empty or Incorrect Length";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this, text, duration);
@@ -67,12 +72,12 @@ public class StartActivity extends Activity {
             toast.show();
             Log.d(LOG_TAG, "Address must start with a 3 or 1");
             return;
-        }*/
+        }
 
         //Saving the Address in the shared prefferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("address", "1EzwoHtiXB4iFwedPr49iywjZn2nnekhoj");
+        editor.putString("address", address);
         editor.commit();
 
         //Starts MainActivity
