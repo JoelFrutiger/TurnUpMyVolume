@@ -233,6 +233,12 @@ public class MainActivity extends ActionBarActivity {
         a.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * This method fetches the Bitcoin Address from the Preferences and queries blockchain.info for the Balance of the Address
+     * Then it checks if enough satoshis have been added by comparing with the old Balance fetched also from the shared Preferences.
+     * If all conditions are met, the Service sets the Ringtone Volume to maximum.
+     * Gets called when getting the Result from StartActivity and when Pressing the Start Service Button.
+     */
     private void initialCheck(){
         URL url;
         try {
@@ -271,8 +277,10 @@ public class MainActivity extends ActionBarActivity {
                 int oldBalance = preferences.getInt("oldBalance", 0);
 
                 //Get Increment to trigger the Volume increase
-                int incrementBit = preferences.getInt("increment", 100);
-                int incrementSatoshi = incrementBit * 100;
+                String incrementBitString = preferences.getString("increment", "100");
+                int incrementBitInt = Integer.parseInt(incrementBitString);
+                int incrementSatoshi = incrementBitInt * 100;
+
 
                 //Check if sufficient Satoshis have been added
                 if ((currentBalance - oldBalance) >= incrementSatoshi){
