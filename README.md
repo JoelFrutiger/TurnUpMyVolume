@@ -1,5 +1,5 @@
 # TurnUpMyVolume
-Android app that lets you turn up ringtone volume by sending bitcoin to a specified address.
+Android app that lets you turn up your phones ringtone volume by sending bitcoin to a specified address.
 
 This allows people to pay you in order to change your volume for important calls. 
 
